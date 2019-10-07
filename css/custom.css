@@ -11,3 +11,11 @@ body {
     .data {
     color: #FF9900;
 }
+
+.teaser{
+    text-align: center;
+}
+
+.teaser-img{
+    height: 300px;
+}
