@@ -39,15 +39,12 @@ The project will focus on : "how do we build fake photos of rainy days, foggy da
 <h2>Project Proposal</h2>
 <h3>Problem statement</h3>
 <p>
-  For instance if we want to train a deep learning model to recognize cars. We train this model with many photos of cars during sunny days. But what happen when the weather change and that the weather is snowy, rainy or foggy ? The model don't work anymore.
+  Deep learning techniques require a lot of labelled data of good quality. Many famous datasets are used today to train models used by autonomous vehicles like Cityscape, BDD, AppolloScape ect … 
+  Unfortunately, the majority of images of these datasets are images taken during sunny days. It means that the models trained on these datasets will work well during sunny days and will perform badly when the weather will change ( for example during a foggy day ).
 </p>
 <p>
-  The idea is to do Data augmentation. Which means to train the model with fake photos of rainy, snowy or foggy days. The project would focus on : "how do we build fake photos of rainy days, foggy days or snowy days ?"
-</p>
-<p>
-  The goal is to take images ( already labeled ) and to transform these images to change the weather. 
-With deep learning ( using GAN ). Researchers can have good results :
-https://www.youtube.com/watch?time_continue=1&v=e3aXvYIWIq0
+  Our idea is then to do data augmentation to cope with this problem. The goal of the project is to be able to change the weather of the images taken during sunny days ( already labelled ) 
+  in order to produce labelled dataset with various weathers ( with snow, with smog, with rain ect … ).
 </p>
 <div class='teaser'>
   <img class='teaser-img' src="img/teaser1.jpg">
@@ -56,12 +53,29 @@ https://www.youtube.com/watch?time_continue=1&v=e3aXvYIWIq0
 
 
 <h3>Approach</h3>
-<p>But in a first time, a more trivial way would be to do color mapping, image segmentation, adding textures ect ... ( things that we studied during the course )
+<p>
+    Many deep learning techniques have been developed in recent years to do data augmentation. For instance, we can use GAN ( generative adversarial network ) or neural style transfer.
+</p>
+<p>
+    However, a more trivial way would be to do color mapping, image segmentation, adding textures ect ... ( things that we studied during the course ).
+
+    During the project we will test the different techniques and check whether the deep learning techniques perform better than more “trivial” techniques.
 </p>
 
 <h3>Experiments and results</h3>
+<p>
+    For the deep learning techniques, we will use codes found on the internet and apply them on our own datasets. The goal is to be able to do data augmentation on a famous dataset like BDD. However, in order to train the models, we will sometimes have to find images on the internet. For instance, no famous datasets contain enough images with fog to do a comprehensive analysis.
+</p>
+<p>    
+    Sometimes, the code have been adapted for artistic goals ( for instance neural style transfer ) and then will have to be adapted to be more realistic.
+</p>
 
-
+<p>
+    For the more “trivial” methods, we will use techniques seen during the course ( like image segmentation, texture fusion ) and we will use our creativity to adapt these techniques to our problems.
+</p>
+<p>
+    The results will first be validated by human vision. If we can’t recognize a fake image from a real image it is a good result. Furthermore, a real validation could be to train models with these fake images and see if these models work on real images.
+</p>
 <br><br>
 
 </body></html>
