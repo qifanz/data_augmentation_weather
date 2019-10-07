@@ -9,19 +9,8 @@
 
 <!-- Le styles -->  
   <link href="css/bootstrap.css" rel="stylesheet">
-<style>
-body {
-padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-}
-.vis {
-color: #3366CC;
-}
-.data {
-color: #FF9900;
-}
-</style>
-  
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements --><!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -39,10 +28,32 @@ color: #FF9900;
 <p style="text-align: center; font-size: 18px; line-height: 1.5em;">Georgia Tech</p>
 <hr>
 
-<h2>Project Proposal</h2>
+<h2>Abstract</h2>
+<p>
+  Data augmentation related to machine learning. 
+The project will focus on : "how do we build fake photos of rainy days, foggy days or snowy days ?" The goal is to take images ( already labeled ) and to transform these images to change the weather by color mapping, image segmentation, adding textures ect.
+[To add: implication and applications in such as autonomous driving etc….]
+</p>
+<hr>
 
+<h2>Project Proposal</h2>
 <h3>Problem statement</h3>
+<p>
+  For instance if we want to train a deep learning model to recognize cars. We train this model with many photos of cars during sunny days. But what happen when the weather change and that the weather is snowy, rainy or foggy ? The model don't work anymore.
+</p>
+<p>
+  The idea is to do Data augmentation. Which means to train the model with fake photos of rainy, snowy or foggy days. The project would focus on : "how do we build fake photos of rainy days, foggy days or snowy days ?"
+</p>
+<p>
+  The goal is to take images ( already labeled ) and to transform these images to change the weather. 
+With deep learning ( using GAN ). Researchers can have good results :
+https://www.youtube.com/watch?time_continue=1&v=e3aXvYIWIq0
+</p>
+
 <h3>Approach</h3>
+<p>But in a first time, a more trivial way would be to do color mapping, image segmentation, adding textures ect ... ( things that we studied during the course )
+</p>
+
 <h3>Experiments and results</h3>
 
 
