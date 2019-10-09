@@ -19,3 +19,7 @@ body {
 .teaser-img{
     height: 300px;
 }
+
+.teaser-img-small{
+    height: 150px;
+}
