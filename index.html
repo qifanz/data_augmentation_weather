@@ -30,21 +30,22 @@
 
 <h2>Abstract</h2>
 <p>
-  Data augmentation related to machine learning. 
-The project will focus on : "how do we build fake photos of rainy days, foggy days or snowy days ?" The goal is to take images ( already labeled ) and to transform these images to change the weather by color mapping, image segmentation, adding textures ect.
-[To add: implication and applications in such as autonomous driving etc….]
+  The project will focus on applying computer vision techniques to effectively synthesize images with various types of weather conditions, such as rainy days, foggy days or snowy days. 
+  The goal is to transform and synthesize images based on original images to effectively attain extra image data for deep learning model training. 
+  Techniques considered to be applied include color mapping, image segmentation, texture modifications and other transformations.
 </p>
 <hr>
 
 <h2>Project Proposal</h2>
 <h3>Problem statement</h3>
 <p>
-  Deep learning techniques require a lot of labelled data of good quality. Many famous datasets are used today to train models used by autonomous vehicles like Cityscape, BDD, AppolloScape ect … 
-  Unfortunately, the majority of images of these datasets are images taken during sunny days. It means that the models trained on these datasets will work well during sunny days and will perform badly when the weather will change ( for example during a foggy day ).
-</p>
+  Deep learning techniques require a large amount of labelled data of good quality. Many widely recognized datasets are used to train models for autonomous vehicles like Cityscape, BDD, AppolloScape etc.. 
+  Unfortunately, the majority of images from these datasets are taken during days with good weather. 
+  As a result, most models trained on these datasets can work well in good weather conditions, but deteriorate significantly in other weather conditions, for example during a foggy day.</p>
 <p>
-  Our idea is then to do data augmentation to cope with this problem. The goal of the project is to be able to change the weather of the images taken during sunny days ( already labelled ) 
-  in order to produce labelled dataset with various weathers ( with snow, with smog, with rain ect … ).
+  Our solution for this problem is to perform data augmentation before model training. 
+  The goal of the project is to change the weather conditions in the images which are originally taken in good weather and already labelled, 
+  and to produce labelled dataset with various weathers (with snow, smog, or rain etc.).
 </p>
 <div class='teaser'>
   <img class='teaser-img' src="img/teaser1.jpg">
@@ -54,28 +55,72 @@ The project will focus on : "how do we build fake photos of rainy days, foggy da
 
 <h3>Approach</h3>
 <p>
-    Many deep learning techniques have been developed in recent years to do data augmentation. For instance, we can use GAN ( generative adversarial network ) or neural style transfer.
+  Data augmentation based on traditional computer vision techniques has been actively explored. 
+  Simple techniques by cropping, rotating, and flipping has been proved with some effectiveness [1]. Image patching with randomly cropping is used to avoid overfitting[2]. 
 </p>
 <p>
-    However, a more trivial way would be to do color mapping, image segmentation, adding textures ect ... ( things that we studied during the course ).
-
-    During the project we will test the different techniques and check whether the deep learning techniques perform better than more “trivial” techniques.
+  More sophisticated and recent deep learning techniques have also been developed in recent years to do data augmentation.
+  For instance, GAN (generative adversarial network) or neural style transfer has been proposed to be used[1].
+</p>
+<P>
+  On this project, we will develop and test methods based on traditional computer vision techniques but on a level further than cropping and patching. 
+  Color mapping, image segmentation, texture modifications and other semantic transformations will be examined. 
+</P>
+<p>
+  We will test the performance influence resulting from data augmentation by these techniques, and compare the performance to augmentation performed by deep learning techniques.
 </p>
 
 <h3>Experiments and results</h3>
+<h4>
+  Program code
+</h4>
 <p>
-    For the deep learning techniques, we will use codes found on the internet and apply them on our own datasets. The goal is to be able to do data augmentation on a famous dataset like BDD. However, in order to train the models, we will sometimes have to find images on the internet. For instance, no famous datasets contain enough images with fog to do a comprehensive analysis.
-</p>
-<p>    
-    Sometimes, the code have been adapted for artistic goals ( for instance neural style transfer ) and then will have to be adapted to be more realistic.
+  For our computer vision techniques for data augmentation, we will use open source library such as OpenCV to implement image segmentation, 
+  texture fusion etc, and further creatively adapt these techniques to our dataset augmentation.
 </p>
 
 <p>
-    For the more “trivial” methods, we will use techniques seen during the course ( like image segmentation, texture fusion ) and we will use our creativity to adapt these techniques to our problems.
+  For the controlled group of deep learning techniques, we will use existing and publically available model codes to train on our datasets. 
+  We may adapted available codes to fit in our purpose. 
 </p>
+
+<h4>
+  Dataset
+</h4>
 <p>
-    The results will first be validated by human vision. If we can’t recognize a fake image from a real image it is a good result. Furthermore, a real validation could be to train models with these fake images and see if these models work on real images.
+  The goal is to perform data augmentation on benchmark datasets such as Berkeley Deep Drive (BDD)[3]. 
+  We may also have to use extra images outside of a dedicated dataset since no publicly recognized dataset that contains sufficient image data with certain weather conditions, 
+  for example foggy day,  to enable a comprehensive analysis.
 </p>
-<br><br>
+
+<h4>
+  Result validation
+</h4>
+
+<p>
+  The results will first be validated by human vision. A synthesized/augmented image will receive a high rate if it can’t be told from a group of other originally taken images. 
+</p>
+
+<p>
+  In a computational way, the validation will be to train models with these synthesized/augmented images and test whether the models trained achieve a performance level same as or higher than trained with original images.
+</p>
+
+<h2>
+Reference
+</h2>
+
+<p>
+  1.	Perez, Luis, and Jason Wang. "The effectiveness of data augmentation in image classification using deep learning."
+   <i>arXiv preprint arXiv:1712.04621 (2017)</i>
+</p>
+
+<p>
+  2.	Takahashi, Ryo, Takashi Matsubara, and Kuniaki Uehara. "Data augmentation using random image cropping and patching for deep cnns." 
+  <i>IEEE Transactions on Circuits and Systems for Video Technology (2019)</i>
+</p>
+
+<p>
+  3.	https://bdd-data.berkeley.edu/
+</p>
 
 </body></html>
