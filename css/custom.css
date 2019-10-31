@@ -20,6 +20,23 @@ body {
     height: 300px;
 }
 
+.teaser-img-big{
+    height: 600px;
+}
+
 .teaser-img-small{
     height: 150px;
 }
+
+hr{
+    height: 10%;
+}
+
+table {
+    text-align: center;
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid black;
+  }
