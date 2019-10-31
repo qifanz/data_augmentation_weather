@@ -58,7 +58,8 @@
             <hr>
             <h3>II. Approach</h3>
             <p>
-                In this project, we chose to use two types of methods: traditional computer vision and deep learning.
+                Due to technical difficulties, and because we would like to create data augmentation for autonomous vehicles, we decide to first focus on Road Driving images.
+                <br>In this project, we chose to use two types of methods: traditional computer vision and deep learning.
             </p>
             <h4>
                 1. Traditional version
@@ -77,7 +78,7 @@
                 especially trees and other plants. For this reason, after several manual tests, we decided to choose K-means.
             </p>
 
-            <table style="width:80%;">
+            <table style="width:100%;">
                 <tr>
                     <th>Algorithm Category</th>
                     <th>Example</th>
@@ -129,21 +130,21 @@
                 2. Deep learning version
             </h4>
 
-            For Deep Learning part, there are 2 approaches to used : <u>Deep Style Transfer</u> and <u>CycleGAN</u>.
+            For Deep Learning part, there are 2 approaches to use : <u>Deep Style Transfer</u> and <u>CycleGAN</u>.
 
             <h5>
                 Deep Style Transfer
             </h5>
 
             <p>
-                For Deep Style Transfer, the goal is to transfer the “style” of an image to another image. Then we need at least one input image ( the image we want to transform ) and one style image. This technique has been widely used for artistic purposed.
+                For Deep Style Transfer, the goal is to transfer the “style” of an image to another image. Thus we need at least one input image ( the image we want to transform ) and one style image. This technique has been widely used for artistic purposed.
             </p>
             <p>
-                Our idea was to use this idea to change the weather of a picture. Particularly, we wanted to use this method to add snow in pictures. A recent version of Deep Style transfer use segmentation in order to transfer the textures to each part of the image.
+                Our idea was to use this approach to change the weather of a picture. Particularly, we wanted to use this method to add snow in pictures. A recent version of Deep Style transfer use segmentation in order to transfer the textures to each part of the image.
                 Our idea was to take 2 images ( one from a sunny day and the other from a snowy day ) that are closely related to efficiently do the transfer.
             </p>
             <p>
-                The code we used was the officiel code from the original paper that we modified to fit our problem. In this part, we assume the segmentation of the picture has been done manually so that we can focus on the style transfer. <i>TODO: we would like to automatize this.</i>
+                The code we used was the official code from the original paper that we modified to fit our problem. In this part, we assume the segmentation of the picture has been done manually so that we can focus on the style transfer. <i>TODO: we would like to automatize this.</i>
             </p>
 
             <h5>
@@ -170,20 +171,21 @@
                 Overall, we used Python as programming language.
                 <br> In traditional part, we used Scikit-image library for k-means algorithm. For texture transfer, we are currently implementing by ourself the paper.
                 <br> In deep learning part, we used Pytorch framework.
+                <br> For deep learning, we used around 500 images, for segmentat we tested on around 50 images.
             </p>
 
             <h4>
                 Results
             </h4>
-            <p>It is hard to interprete the results of data augmentation using metrics etc. Currently, we are focusing on trying different methods and use our eyes to validate the result</p>
-            <p>In this first update, we currently focus on Deep Learning techniques.</p>
+            <p>It is hard to interprete the results of data augmentation using metrics etc. Currently, we are focusing on trying different methods and use our eyes to validate the result.</p>
+            <p>In this first update, we mainly focused on Deep Learning techniques.</p>
             <h5>1. Deep Style Transfer</h5>
             <p>
-                Firsty, we can note that the edges of the road are not clear. This because the segmentation is not perfect and then some texture from the snow has been applied to the road.
+                Firsty, we can note that the edges of the road are not clear. This is because the segmentation is not perfect and then some texture from the snow has been applied to the road.
                 <br> Secondly, we can see that really often there are problems of “averaging”. In fact, we can see that the snow in the trees is sometime gray which is not realistic. This is because this method involves a loss minimization and as the
                 2 main colors in the style image are black and white, the solution of this minimization is a kind of gray that doesn’t represent real snow.
                 <br> Finally, we can see that the snow on the roadside is hardly realistic. The snow here is just a kind of white with some gradient of colors. We don’t see the granularity of the snow that would make it realistic.
-                <br> This result is not encouraging because this has been tested on a real simple problem ( a road surrounded by trees ). It will be much harder in real life situation like in a residential area.
+                <br> This result is not encouraging because this has been tested on a really simple problem ( a road surrounded by trees ). It will be much harder in real life situation like in a residential area.
             </p>
 
             <div class='teaser'>
