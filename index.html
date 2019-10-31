@@ -1,322 +1,307 @@
 <!DOCTYPE html>
-<html lang="en"><head>  
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta charset="utf-8">
-  <title>Computer Vision Class Project</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
+<html lang="en">
 
-<!-- Le styles -->  
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/custom.css" rel="stylesheet">
-  <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Computer Vision Class Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements --><!--[if lt IE 9]>
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 </head>
 
 <body>
-<div class="container">
-<div class="page-header">
+    <div class="container">
+        <div class="page-header">
 
-<!-- Title and Name --> 
-<h1 style='text-align: center'>Data augmentation - different weathers</h1> 
-<p style="text-align: center; font-size: 20px; line-height: 1.5em;"><strong>Eric Gastineau, Yiliang Guo, Weiguang Huang, Qifan Zhang</strong></p>
-<p style="text-align: center; font-size: 18px; line-height: 1.5em;">Fall 2019 Computer Vision: Class Project</p>
-<p style="text-align: center; font-size: 18px; line-height: 1.5em;">Georgia Tech</p>
-<hr>
+            <!-- Title and Name -->
+            <h1 style='text-align: center'>Data augmentation - different weathers</h1>
+            <p style="text-align: center; font-size: 20px; line-height: 1.5em;"><strong>Eric Gastineau, Yiliang Guo, Weiguang Huang, Qifan Zhang</strong></p>
+            <p style="text-align: center; font-size: 18px; line-height: 1.5em;">Fall 2019 Computer Vision: Class Project</p>
+            <p style="text-align: center; font-size: 18px; line-height: 1.5em;">Georgia Tech</p>
+            <hr>
 
-<h2>Abstract</h2>
-<p>
-  The project will focus on applying computer vision techniques to effectively synthesize images with various types of weather conditions, such as rainy days, foggy days or snowy days. 
-  The goal is to transform and synthesize images based on original images to effectively attain extra image data for deep learning model training. 
-  Techniques considered to be applied include color mapping, image segmentation, texture modifications and other transformations.
-</p>
-<hr>
+            <h2>Abstract</h2>
+            <p>
+                The project will focus on applying computer vision techniques to effectively synthesize images with various types of weather conditions, such as rainy days, foggy days or snowy days. The goal is to transform and synthesize images based on original images
+                to effectively attain extra image data for deep learning model training. Techniques considered to be applied include color mapping, image segmentation, texture modifications and other transformations.
+            </p>
+            <hr>
 
-<h2>Project Proposal</h2>
-<h3>I. Problem statement</h3>
-<p>
-  Deep learning techniques require a large amount of labelled data of good quality. 
-  Many widely recognized datasets are used to train models for autonomous vehicles like Cityscape, BDD, AppolloScape etc.. 
-  Unfortunately, the majority of images from these datasets are taken during days with good weather. 
-  As a result, most models trained on these datasets can work well in good weather conditions, but deteriorate significantly in other weather conditions, for example during a foggy day.</p>
-<p>
-  Our solution for this problem is to perform data augmentation before model training<sup>[4]</sup>. 
-  The goal of the project is to change the weather conditions in the images which are originally taken in good weather and already labelled, 
-  and to produce labelled dataset with various weathers (with snow, smog, or rain etc.).
-</p>
-<div class='teaser'>
-  <img class='teaser-img' src="img/teaser1.jpg">
-</div>
-<div class='teaser'>
-  <img class='teaser-img' src="img/eiffel_tower.png">
-  <br>
-  Eiffel tower in different weathers<sup>[7]</sup>
-</div>
+            <h2>Project Proposal</h2>
+            <h3>I. Problem statement</h3>
+            <p>
+                Deep learning techniques require a large amount of labelled data of good quality. Many widely recognized datasets are used to train models for autonomous vehicles like Cityscape, BDD, AppolloScape etc.. Unfortunately, the majority of images from these
+                datasets are taken during days with good weather. As a result, most models trained on these datasets can work well in good weather conditions, but deteriorate significantly in other weather conditions, for example during a foggy day.</p>
+            <p>
+                Our solution for this problem is to perform data augmentation before model training<sup>[4]</sup>. The goal of the project is to change the weather conditions in the images which are originally taken in good weather and already labelled,
+                and to produce labelled dataset with various weathers (with snow, smog, or rain etc.).
+            </p>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/teaser1.jpg">
+            </div>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/eiffel_tower.png">
+                <br> Eiffel tower in different weathers<sup>[7]</sup>
+            </div>
 
-<hr>
-<h3>II. Approach</h3>
-<p>
-  In this project, we chose to use two types of methods: traditional computer vision and deep learning.
-</p>
-<h4>
-  1. Traditional version
-</h4>
-<p>
-  In the traditional version, we first do segmentation on a road driving image that we would like to change the weather and create augmented images.
-  We then extract textures of “weathers” from target image. Finally we do texture transfer on each segments of original image to create an augmented image. 
-</p>
-<div class='teaser'>
-  <!--img class='teaser-img' src="img/teaser1.jpg"-->
-  <br>
-  Pipeline for traditional method
-</div>
+            <hr>
+            <h3>II. Approach</h3>
+            <p>
+                In this project, we chose to use two types of methods: traditional computer vision and deep learning.
+            </p>
+            <h4>
+                1. Traditional version
+            </h4>
+            <p>
+                In the traditional version, we first do segmentation on a road driving image that we would like to change the weather and create augmented images. We then extract textures of “weathers” from target image. Finally we do texture transfer on each segments
+                of original image to create an augmented image.
+            </p>
+            <div class='teaser'>
+                <!--img class='teaser-img' src="img/teaser1.jpg"-->
+                <br> Pipeline for traditional method
+            </div>
 
-<p>
-  We tested a range of algorithm on the segmentation task to separate the background scene of the images and got to know better the response from the algorithms on the task. The main difficulty in our approach is to clearly separate the road and the background, 
-  especially trees and other plants. For this reason, after several manual tests, we decided to choose K-means.
-</p>
-<p>Based on scikit-image, We did the following implementations:
-   - Denoise + kmean
-   - Denoise + kmean + thresholding with normalized cut
-   - Denoise + water thresholding    
-</p>
-<table style="width:80%;">
-  <tr>
-    <th>Algorithm Category</th>
-    <th>Example</th>
-    <th>Characteristic</th>
-    <th>Preference for task</th>
-  </tr>
-  <tr>
-    <td>Kmean based</td>
-    <td>Kmean (+ normalized cut)</td>
-    <td>Relatively good performance at segmenting the background of road driving image</td>
-    <td>High</td>
-  </tr>
-  <tr>
-      <td>Region based segmentation</td>
-      <td>Water threshold</td>
-      <td>Good at separating areas, but required tuning the threshold of bordering edge</td>
-      <td>High</td>
-    </tr>
+            <p>
+                We tested a range of algorithm on the segmentation task to separate the background scene of the images and got to know better the response from the algorithms on the task. The main difficulty in our approach is to clearly separate the road and the background,
+                especially trees and other plants. For this reason, after several manual tests, we decided to choose K-means.
+            </p>
 
-    <tr>
-        <td>Edge based segmentation</td>
-        <td>Canny detector + thresholding + filling contour</td>
-        <td>Good at separate foreground objects; but not very good at distinguishing backgrounds</td>
-        <td>Medium</td>
-      </tr>
+            <table style="width:80%;">
+                <tr>
+                    <th>Algorithm Category</th>
+                    <th>Example</th>
+                    <th>Characteristic</th>
+                    <th>Preference for task</th>
+                </tr>
+                <tr>
+                    <td>Kmean based</td>
+                    <td>Kmean (+ normalized cut)</td>
+                    <td>Relatively good performance at segmenting the background of road driving image</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>Region based segmentation</td>
+                    <td>Water threshold</td>
+                    <td>Good at separating areas, but required tuning the threshold of bordering edge</td>
+                    <td>High</td>
+                </tr>
 
-      <tr>
-          <td>Contour snake based segmentation</td>
-          <td>Interactive contour model</td>
-          <td>Good performance at segmentation, but required human supervising</td>
-          <td>low</td>
-        </tr>
-</table>
-<p>
-  In order to then do texture transfer, we aim to implement the algorithm described in the paper Image Quilting for Texture Synthesis and Transfer. 
-  For example, we take an image containing texture of trees with snow and we transfer that to a new image. We currently have not yet finished this part due to difficulties in code.
-</p>
+                <tr>
+                    <td>Edge based segmentation</td>
+                    <td>Canny detector + thresholding + filling contour</td>
+                    <td>Good at separate foreground objects; but not very good at distinguishing backgrounds</td>
+                    <td>Medium</td>
+                </tr>
 
-<h4>
-  2. Deep learning version
-</h4>
+                <tr>
+                    <td>Contour snake based segmentation</td>
+                    <td>Interactive contour model</td>
+                    <td>Good performance at segmentation, but required human supervising</td>
+                    <td>low</td>
+                </tr>
+            </table>
+            <p>Based on scikit-image, We did the following implementations:
+                <br> - Denoise + kmean
+                <br> - Denoise + kmean + thresholding with normalized cut
+                <br> - Denoise + water thresholding
+            </p>
+            <p>
+                In order to then do texture transfer, we aim to implement the algorithm described in the paper <b><i>Image Quilting for Texture Synthesis and Transfer</i></b>. For example, we take an image containing texture of trees with snow and we
+                transfer that to a new image. We currently have not yet finished this part due to difficulties in code.
+            </p>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/texture_transfer.png">
+                <br> Texture transfer example, from paper <i>Image Quilting for Texture Synthesis and Transfer</i>
+            </div>
 
-For Deep Learning part, there are 2 approaches to used : <u>Deep Style Transfer</u> and <u>CycleGAN</u>.
+            <h4>
+                2. Deep learning version
+            </h4>
 
-<h5>
-  Deep Style Transfer
-</h5>
+            For Deep Learning part, there are 2 approaches to used : <u>Deep Style Transfer</u> and <u>CycleGAN</u>.
 
-<p>
-  For Deep Style Transfer, the goal is to transfer the “style” of an image to another image. Then we need at least one input image ( the image we want to transform ) and one style image. 
-  This technique has been widely used for artistic purposed.
-</p>
-<p>
-  Our idea was to use this idea to change the weather of a picture. Particularly, we wanted to use this method to add snow in pictures. 
-  A recent version of Deep Style transfer use segmentation in order to transfer the textures to each part of the image. Our idea was to take 2 images 
-  ( one from a sunny day and the other from a snowy day ) that are closely related to efficiently do the transfer. 
-</p>
-<p>
-  The code we used was the officiel code from the original paper that we modified to fit our problem.
-  In this part, we assume the segmentation of the picture has been done manually so that we can focus on the style transfer. <i>TODO: we would like to automatize this.</i>
-</p>
+            <h5>
+                Deep Style Transfer
+            </h5>
 
-<h5>
-  Cycle GAN
-</h5>
-<p>
-  The goal of GANs is to produce realistic images. With CycleGAN, we want to transform an image from one domain A ( for instance sunny days ) 
-  to another domain B ( for instance snowy days ). We are not going to expand on the whole theory, but roughly this technique use CNN to do this conversion. 
-  There are 2 CNNs G and F used to transform the images ( one that transform from A to B and the other from B to A ) and 2 CNNs Dx and Dy used to discriminate between the 2 domains. 
-  The cycle consistency between the 2 domains and the discriminators scores are used to optimize these networks
-</p>
-<div class='teaser'>
-    <img class='teaser-img' src="img/cycle_theory.png">
-    <br>
-</div>
-    
-<hr>
+            <p>
+                For Deep Style Transfer, the goal is to transfer the “style” of an image to another image. Then we need at least one input image ( the image we want to transform ) and one style image. This technique has been widely used for artistic purposed.
+            </p>
+            <p>
+                Our idea was to use this idea to change the weather of a picture. Particularly, we wanted to use this method to add snow in pictures. A recent version of Deep Style transfer use segmentation in order to transfer the textures to each part of the image.
+                Our idea was to take 2 images ( one from a sunny day and the other from a snowy day ) that are closely related to efficiently do the transfer.
+            </p>
+            <p>
+                The code we used was the officiel code from the original paper that we modified to fit our problem. In this part, we assume the segmentation of the picture has been done manually so that we can focus on the style transfer. <i>TODO: we would like to automatize this.</i>
+            </p>
+
+            <h5>
+                Cycle GAN
+            </h5>
+            <p>
+                The goal of GANs is to produce realistic images. With CycleGAN, we want to transform an image from one domain A ( for instance sunny days ) to another domain B ( for instance snowy days ). We are not going to expand on the whole theory, but roughly this
+                technique use CNN to do this conversion. There are 2 CNNs G and F used to transform the images ( one that transform from A to B and the other from B to A ) and 2 CNNs Dx and Dy used to discriminate between the 2 domains. The cycle consistency
+                between the 2 domains and the discriminators scores are used to optimize these networks
+            </p>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/cycle_theory.png">
+                <br>
+            </div>
+
+            <hr>
 
 
-<h3>III. Experiments and results</h3>
-<h4>
-  Program code
-</h4>
-<p>
-  Overall, we used Python as programming language. 
-  <br>
-  In traditional part, we used Scikit-image library for k-means algorithm. For texture transfer, we are currently implementing by ourself the paper.
-  <br>
-  In deep learning part, we used Pytorch framework.
-</p>
+            <h3>III. Experiments and results</h3>
+            <h4>
+                Program code
+            </h4>
+            <p>
+                Overall, we used Python as programming language.
+                <br> In traditional part, we used Scikit-image library for k-means algorithm. For texture transfer, we are currently implementing by ourself the paper.
+                <br> In deep learning part, we used Pytorch framework.
+            </p>
 
-<h4>
-  Results
-</h4>
-<p>It is hard to interprete the results of data augmentation using metrics etc. Currently, we are focusing on trying different methods and use our eyes to validate the result</p>
-<p>In this first update, we currently focus on Deep Learning techniques.</p>
-<h5>1. Deep Style Transfer</h5>
-<p>
-Firsty, we can note that the edges of the road are not clear. This because the segmentation is not perfect and then some texture from the snow has been applied to the road.
-<br>
-Secondly, we can see that really often there are problems of “averaging”. In fact, we can see that the snow in the trees is sometime gray which is not realistic. This is because this method involves a loss minimization and as the 2 main colors in the style image are black and white, the solution of this minimization is a kind of gray that doesn’t represent real snow.
-<br>
-Finally, we can see that the snow on the roadside is hardly realistic. The snow here is just a kind of white with some gradient of colors. We don’t see the granularity of the snow that would make it realistic.
-<br>
-This result is not encouraging because this has been tested on a real simple problem ( a road surrounded by trees ). It will be much harder in real life situation like in a residential area.
-</p>
+            <h4>
+                Results
+            </h4>
+            <p>It is hard to interprete the results of data augmentation using metrics etc. Currently, we are focusing on trying different methods and use our eyes to validate the result</p>
+            <p>In this first update, we currently focus on Deep Learning techniques.</p>
+            <h5>1. Deep Style Transfer</h5>
+            <p>
+                Firsty, we can note that the edges of the road are not clear. This because the segmentation is not perfect and then some texture from the snow has been applied to the road.
+                <br> Secondly, we can see that really often there are problems of “averaging”. In fact, we can see that the snow in the trees is sometime gray which is not realistic. This is because this method involves a loss minimization and as the
+                2 main colors in the style image are black and white, the solution of this minimization is a kind of gray that doesn’t represent real snow.
+                <br> Finally, we can see that the snow on the roadside is hardly realistic. The snow here is just a kind of white with some gradient of colors. We don’t see the granularity of the snow that would make it realistic.
+                <br> This result is not encouraging because this has been tested on a real simple problem ( a road surrounded by trees ). It will be much harder in real life situation like in a residential area.
+            </p>
 
-<div class='teaser'>
-    <img class='teaser-img-big' src="img/result/deep/transfer.png">
-    <br>
-    Deep Style Transfer result 1
-</div>
-<h5>2. Cycle GAN</h5>
-<p>
-    We used CycleGAN for 2 different domain transfer : Sunny ↔ Foggy and Sunny ↔ Snowy.
- <br>
-    Unfortunately, there was a lack of data for these 2 domain transfer. Some of the images have been found in the BDD dataset and other have been found manually on the internet thanks to google image.
-    <br>   
-  
-    For Sunny ↔ Foggy we used 205 images from sunny days and 205 images from foggy days.
-    <br>   
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/transfer.png">
+                <br> Deep Style Transfer result 1
+            </div>
+            <h5>2. Cycle GAN</h5>
+            <p>
+                We used CycleGAN for 2 different domain transfer : Sunny ↔ Foggy and Sunny ↔ Snowy.
+                <br> Unfortunately, there was a lack of data for these 2 domain transfer. Some of the images have been found in the BDD dataset and other have been found manually on the internet thanks to google image.
+                <br> For Sunny ↔ Foggy we used 205 images from sunny days and 205 images from foggy days.
+                <br> For Sunny ↔ Snowy we used 295 images from sunny days and 293 images from snowy days.
+                <br> The code we used was the official code from the original paper that we modified so that it can fit our problem.
+                <br> For Sunny ↔ Foggy, we had encouraging results.
+                <br> Some image from Sunny to Foggy : ( left = sunny input, right = artificial foggy output )
 
-    For Sunny ↔ Snowy we used 295 images from sunny days and 293 images from snowy days.
- <br>   
-    The code we used was the official code from the original paper that we modified so that it can fit our problem.
-    <br>   
-    
-    For Sunny ↔ Foggy, we had encouraging results.
-    <br>   
+            </p>
 
-    Some image from Sunny to Foggy : ( left = sunny input, right = artificial foggy output )
-    
-</p>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle1.png">
+                <br>
+            </div>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle2.png">
+                <br>
+            </div>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle3.png">
+                <br>
+            </div>
+            <p>
+                There are some degradations when we do the conversion but we can clearly see a realistic fog.
+                <br> However, the conversion from Foggy to Sunny is harder because the loss of information is only in one direction :
 
-<div class='teaser'>
-    <img class='teaser-img' src="img/result/deep/cycle1.png">
-    <br>
-  </div>
-  <div class='teaser'>
-      <img class='teaser-img' src="img/result/deep/cycle2.png">
-      <br>
-    </div><div class='teaser'>
-        <img class='teaser-img' src="img/result/deep/cycle3.png">
-        <br>
-      </div>
-  <p>
-      There are some degradations when we do the conversion but we can clearly see a realistic fog.
-      <br>
-      However, the conversion from Foggy to Sunny is harder because the loss of information is only in one direction :
-      
-  </p>
-  <div class='teaser'>
-      <img class='teaser-img' src="img/result/deep/cycle4.png">
-      <br>
-    </div>
+            </p>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle4.png">
+                <br>
+            </div>
 
-    <p>
-        The neural network try to invent features that don’t exist which is really hard. However, our initial goal is to be able to convert images from sunny days, then we don’t care about this conversion.
-        <br>
-        For Sunny ↔ Snowy, the results are less positive : ( left = sunny input, right = artificial snowy output )
-        
-    </p>
+            <p>
+                The neural network try to invent features that don’t exist which is really hard. However, our initial goal is to be able to convert images from sunny days, then we don’t care about this conversion.
+                <br> For Sunny ↔ Snowy, the results are less positive : ( left = sunny input, right = artificial snowy output )
 
-    <div class='teaser'>
-        <img class='teaser-img' src="img/result/deep/cycle5.png">
-        <br>
-      </div>
-    <div class='teaser'>
-        <img class='teaser-img' src="img/result/deep/cycle6.png">
-        <br>
-      </div>  
-    <div class='teaser'>
-        <img class='teaser-img' src="img/result/deep/cycle7.png">
-        <br>
-      </div>
+            </p>
 
-    <p>
-        The snow is correctly applied to trees ( even if there is still sometimes some problems of averaging ). But the biggest problem is how to road is colored. The issue is that the data had many images where the road was either carpeted with snow or was de-iced. As a result, the neural network don’t really know how to cope with roads. In many images, it simply applied an average color between white and gray ( not realistic ) and in other images it applied different colors on the road like above. The Sunny ↔ Snowy conversion is certainly the hardest because there are many different situations for a snowy day and it’s hard to find a single neural network to handle every possibilities.
-        <br>
-        Also, as for the fog, the loss of information is only in one direction and then the conversion from snowy to sunny is harder :
-        
-    </p>
-    <div class='teaser'>
-        <img class='teaser-img' src="img/result/deep/cycle8.png">
-        <br>
-      </div>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle5.png">
+                <br>
+            </div>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle6.png">
+                <br>
+            </div>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle7.png">
+                <br>
+            </div>
+
+            <p>
+                The snow is correctly applied to trees ( even if there is still sometimes some problems of averaging ). But the biggest problem is how to road is colored. The issue is that the data had many images where the road was either carpeted with snow or was de-iced.
+                As a result, the neural network don’t really know how to cope with roads. In many images, it simply applied an average color between white and gray ( not realistic ) and in other images it applied different colors on the road like above.
+                The Sunny ↔ Snowy conversion is certainly the hardest because there are many different situations for a snowy day and it’s hard to find a single neural network to handle every possibilities.
+                <br> Also, as for the fog, the loss of information is only in one direction and then the conversion from snowy to sunny is harder :
+
+            </p>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/deep/cycle8.png">
+                <br>
+            </div>
 
 
 
 
-<h5>3. Traditional method</h5>
-We have not yet finished the integration with texture transfer. Here are some results for K-means segmentation.
+            <h5>3. Traditional method</h5>
+            We have not yet finished the integration with texture transfer. Here are some results for K-means segmentation.
 
-<div class='teaser'>
-    <img class='teaser-img' src="img/result/trad/kmeans.png">
-    <br>
-  </div>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/result/trad/kmeans.png">
+                <br>
+            </div>
 
 
-<hr>
-<h2>
-Reference
-</h2>
+            <hr>
+            <h2>
+                Reference
+            </h2>
 
-<p>
-  1.	Perez, Luis, and Jason Wang. "The effectiveness of data augmentation in image classification using deep learning."
-   <i>arXiv preprint arXiv:1712.04621 (2017)</i>
-</p>
+            <p>
+                1. Perez, Luis, and Jason Wang. "The effectiveness of data augmentation in image classification using deep learning."
+                <i>arXiv preprint arXiv:1712.04621 (2017)</i>
+            </p>
 
-<p>
-  2.	Takahashi, Ryo, Takashi Matsubara, and Kuniaki Uehara. "Data augmentation using random image cropping and patching for deep cnns." 
-  <i>IEEE Transactions on Circuits and Systems for Video Technology (2019)</i>
-</p>
+            <p>
+                2. Takahashi, Ryo, Takashi Matsubara, and Kuniaki Uehara. "Data augmentation using random image cropping and patching for deep cnns."
+                <i>IEEE Transactions on Circuits and Systems for Video Technology (2019)</i>
+            </p>
 
-<p>
-  3.	https://bdd-data.berkeley.edu/
-</p>
+            <p>
+                3. https://bdd-data.berkeley.edu/
+            </p>
 
-<p>
-  4.  DConnor Shorten and Taghi M. Khoshgoftaar. "A survey on Image Data Augmentation for Deep Learning."
-  <I>Shorten and Khoshgoftaar J Big Data (2019) 6:60   </I>
-</p>
-<p>
-  5.  Fujun Luan, Sylvain Paris, Eli Shechtman, Kavita Bala. "Deep Photo Style Transfer"
-  <i>arXiv preprint arXiv:1703.07511</i>
-</p>
-<p>
-  6.  Jun-Yan Zhu, Taesung Park, Phillip Isola, Alexei A. Efros. "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks"
-  <i>arXiv preprint arXiv:1703.10593</i>
-</p>
-<p>
-  7.  Wei-Ta Chu, Xiang-You Zheng, Ding-Shiuan Ding. "Image2Weather: A Large-Scale Image Dataset for Weather Property Estimation"
-  <i>2016 IEEE Second International Conference on Multimedia Big Data (BigMM)</i>
-</p>
-</body></html>
+            <p>
+                4. DConnor Shorten and Taghi M. Khoshgoftaar. "A survey on Image Data Augmentation for Deep Learning."
+                <I>Shorten and Khoshgoftaar J Big Data (2019) 6:60   </I>
+            </p>
+            <p>
+                5. Fujun Luan, Sylvain Paris, Eli Shechtman, Kavita Bala. "Deep Photo Style Transfer"
+                <i>arXiv preprint arXiv:1703.07511</i>
+            </p>
+            <p>
+                6. Jun-Yan Zhu, Taesung Park, Phillip Isola, Alexei A. Efros. "Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks"
+                <i>arXiv preprint arXiv:1703.10593</i>
+            </p>
+            <p>
+                7. Wei-Ta Chu, Xiang-You Zheng, Ding-Shiuan Ding. "Image2Weather: A Large-Scale Image Dataset for Weather Property Estimation"
+                <i>2016 IEEE Second International Conference on Multimedia Big Data (BigMM)</i>
+            </p>
+</body>
+
+</html>
