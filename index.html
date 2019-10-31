@@ -60,25 +60,65 @@
 
 <h3>Approach</h3>
 <p>
-  Data augmentation based on traditional computer vision techniques has been actively explored. 
-  Simple techniques by cropping, rotating, and flipping has been proved with some effectiveness<sup>[1]</sup>. Image patching with randomly cropping is used to avoid overfitting<sup>[2]</sup>. 
+  In this project, we chose to use two types of methods: traditional computer vision and deep learning.
 </p>
+<h4>
+  Traditional version
+</h4>
 <p>
-  More sophisticated and recent deep learning techniques have also been developed in recent years to do data augmentation.
-  For instance, GAN (generative adversarial network)<sup>[6]</sup> or neural style transfer<sup>[5]</sup> has been proposed to be used<sup>[1]</sup>.
-</p>
-<P>
-  On this project, we will develop and test methods based on traditional computer vision techniques but on a level further than cropping and patching. 
-  Color mapping, image segmentation, texture modifications and other semantic transformations will be examined. 
-</P>
-<p>
-  We will test the performance influence resulting from data augmentation by these techniques, and compare the performance to augmentation performed by deep learning techniques.
+  In the traditional version, we first do segmentation on a road driving image that we would like to change the weather and create augmented images.
+  We then extract textures of “weathers” from target image. Finally we do texture transfer on each segments of original image to create an augmented image. 
 </p>
 <div class='teaser'>
-  <img class='teaser-img-small' src="img/style_transfer.jpg">
+  <!--img class='teaser-img' src="img/teaser1.jpg"-->
   <br>
-  example of deep neural style transfer
+  Pipeline for traditional method
 </div>
+
+<p>
+  We tested a range of algorithm on the segmentation task to separate the background scene of the images and got to know better the response from the algorithms on the task. The main difficulty in our approach is to clearly separate the road and the background, 
+  especially trees and other plants. For this reason, after several manual tests, we decided to choose K-means.
+</p>
+<p>
+  In order to then do texture transfer, we aim to implement the algorithm described in the paper Image Quilting for Texture Synthesis and Transfer. 
+  For example, we take an image containing texture of trees with snow and we transfer that to a new image. We currently have not yet finished this part due to difficulties in code.
+</p>
+
+<h4>
+  Deep learning version
+</h4>
+
+For Deep Learning part, there are 2 approaches to used : <u>Deep Style Transfer</u> and <u>CycleGAN</u>.
+
+<h5>
+  Deep Style Transfer
+</h5>
+
+<p>
+  For Deep Style Transfer, the goal is to transfer the “style” of an image to another image. Then we need at least one input image ( the image we want to transform ) and one style image. 
+  This technique has been widely used for artistic purposed.
+</p>
+<p>
+  Our idea was to use this idea to change the weather of a picture. Particularly, we wanted to use this method to add snow in pictures. 
+  A recent version of Deep Style transfer use segmentation in order to transfer the textures to each part of the image. Our idea was to take 2 images 
+  ( one from a sunny day and the other from a snowy day ) that are closely related to efficiently do the transfer. 
+
+</p>
+<p>
+  The code we used was the officiel code from the original paper that we modified to fit our problem.
+  In this part, we assume the segmentation of the picture has been done manually so that we can focus on the style transfer. <i>TODO: we would like to automatize this.</i>
+</p>
+
+<h5>
+  Cycle GAN
+</h5>
+<p>
+  The goal of GANs is to produce realistic images. With CycleGAN, we want to transform an image from one domain A ( for instance sunny days ) 
+  to another domain B ( for instance snowy days ). We are not going to expand on the whole theory, but roughly this technique use CNN to do this conversion. 
+  There are 2 CNNs G and F used to transform the images ( one that transform from A to B and the other from B to A ) and 2 CNNs Dx and Dy used to discriminate between the 2 domains. 
+  The cycle consistency between the 2 domains and the discriminators scores are used to optimize these networks
+</p>
+
 
 <h3>Experiments and results</h3>
 <h4>
