@@ -74,44 +74,10 @@
             </div>
 
             <p>
-                We tested a range of algorithm on the segmentation task to separate the background scene of the images and got to know better the response from the algorithms on the task. The main difficulty in our approach is to clearly separate the road and the background,
-                especially trees and other plants. For this reason, after several manual tests, we decided to choose K-means.
+                We tested a range of algorithm on the segmentation task to separate the background scene of the images and got to know better the response from the algorithms on the task.
+                <br> For more detail see result part.
             </p>
 
-            <table style="width:100%;">
-                <tr>
-                    <th>Algorithm Category</th>
-                    <th>Example</th>
-                    <th>Characteristic</th>
-                    <th>Preference for task</th>
-                </tr>
-                <tr>
-                    <td>Kmean based</td>
-                    <td>Kmean (+ normalized cut)</td>
-                    <td>Relatively good performance at segmenting the background of road driving image</td>
-                    <td>High</td>
-                </tr>
-                <tr>
-                    <td>Region based segmentation</td>
-                    <td>Water threshold</td>
-                    <td>Good at separating areas, but required tuning the threshold of bordering edge</td>
-                    <td>High</td>
-                </tr>
-
-                <tr>
-                    <td>Edge based segmentation</td>
-                    <td>Canny detector + thresholding + filling contour</td>
-                    <td>Good at separate foreground objects; but not very good at distinguishing backgrounds</td>
-                    <td>Medium</td>
-                </tr>
-
-                <tr>
-                    <td>Contour snake based segmentation</td>
-                    <td>Interactive contour model</td>
-                    <td>Good performance at segmentation, but required human supervising</td>
-                    <td>low</td>
-                </tr>
-            </table>
             <p>Based on scikit-image, We did the following implementations:
                 <br> - Denoise + kmean
                 <br> - Denoise + kmean + thresholding with normalized cut
@@ -261,10 +227,64 @@
 
 
             <h5>3. Traditional method</h5>
-            We have not yet finished the integration with texture transfer. Here are some results for K-means segmentation.
+            We have not yet finished the integration with texture transfer. Here are some results for segmentation.
+            <br> We score the segmentation performance of algorithms in a range of score 0 - 5 based on our judgement on the quality of the output.
+            <br>
+            <b>Images for test</b>
+            <br>Image source: google image search, flickr, instagram
+            <br> Test input sample: 15 random images with road, tree, and optional sky.
+            <br><b>Score criteria</b>
+            <br>0: failed to separate the background and foreground
+            <br>1: separate the background and foreground, but fail to separate in reasonable boundary
+            <br>2: separate road, trees, sky, but have significantly mistake in boundary
+            <br>3: separate road, trees, sky correctly, but have noticeable boundary mistakes
+            <br>4. Separate road, trees, sky correctly, have mistakes in secondary boundary within the major segments
+            <br>5. Separated road, trees, sky correctly, do well in secondary boundary within major segments
 
+            <table style="width:100%;">
+                <tr>
+                    <th>Algorithm Category</th>
+                    <th>Characteristic</th>
+                    <th>Total performance score</th>
+                </tr>
+                <tr>
+                    <td>Denoise + kmean</td>
+                    <td>Relatively good performance at segmenting the major segments of road driving image</td>
+                    <td>46</td>
+                </tr>
+                <tr>
+                    <td>Denoise + kmean + thresholding with normalized cut</td>
+                    <td>Easily mistake at boundaries of major segments</td>
+                    <td>38</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Denoise + water thresholding
+                    </td>
+                    <td>Relatively good performance at segmenting major segments and secondary boundaries within larger segment</td>
+                    <td>62</td>
+                </tr>
+
+            </table>
+            <br><u>Keman works example</u>
             <div class='teaser'>
                 <img class='teaser-img' src="img/result/trad/kmeans.png">
+                <br>
+            </div>
+            <br><u>Kmean failed example</u>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/keman_fail.png">
+                <br>
+            </div>
+            <br><u>Kmean + threshold failed example</u>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/kmean_thresh_fail.png">
+                <br>
+            </div>
+            <br><u>water thresholding failed example</u>
+            <div class='teaser'>
+                <img class='teaser-img' src="img/water_fail.png">
                 <br>
             </div>
 
